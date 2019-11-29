@@ -1,0 +1,9 @@
+.highlight {
+	font-weight: bold;
+}
+
+.opportunities_list {
+	list-style-type: none;
+	padding: 0px 10px;
+	margin: 10px 0px;
+}
