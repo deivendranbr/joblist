@@ -25,8 +25,10 @@ class App extends React.Component {
 	}
 
 	getJobList = () => {
-		let jobList = this.props.string.match(/[^\r\n]+/g);
-		let jobListJson = this.props.json.match(/[^\r\n]+/g);
+		let inputs = this.props.string.split('--JSON FORMAT BELOW--');
+		let jobList = inputs[0].trim().match(/[^\r\n]+/g);
+		let jsonString = inputs[1].trim().replace(new RegExp('}\n', 'g'), '},');
+		let jobListJson = JSON.parse('['+ jsonString +']');
 
 		jobList = jobList.map(sentence => {
 			let jobDetailsString = sentence.trim()
@@ -39,8 +41,8 @@ class App extends React.Component {
 			}
 		});
 
-		jobListJson.forEach((sentence) => {
-			let jobDetail = JSON.parse(sentence);
+		jobListJson.forEach((jobDetail) => {
+			// let jobDetail = JSON.parse(sentence);
 			jobList.push({
 				title: jobDetail.name,
 				org: jobDetail.organization,
